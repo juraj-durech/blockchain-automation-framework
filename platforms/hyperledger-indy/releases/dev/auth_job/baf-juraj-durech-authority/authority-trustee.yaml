@@ -27,7 +27,7 @@ spec:
       identity: authority-trustee
       admin_auth_path: kubernetes-baf-juraj-durech-authority-admin-auth
       policy: baf-juraj-durech-authority-authority-trustee-ro
-      policy_content: path \"/kv/baf-juraj-durech-authority/trustees/authority-trustee/*\" { capabilities = [ \"read\", \"list\" ] }
+      policy_content: path \"/baf-juraj-durech-authority/trustees/authority-trustee/*\" { capabilities = [ \"read\", \"list\" ] }
       auth_path: kubernetes-baf-juraj-durech-authority-authority-trustee-auth
     account:
       admin_service: baf-juraj-durech-authority-admin-vault-auth
