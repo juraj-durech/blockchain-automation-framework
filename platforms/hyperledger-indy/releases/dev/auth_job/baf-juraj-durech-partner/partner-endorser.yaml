@@ -27,7 +27,7 @@ spec:
       identity: partner-endorser
       admin_auth_path: kubernetes-baf-juraj-durech-partner-admin-auth
       policy: baf-juraj-durech-partner-partner-endorser-ro
-      policy_content: path \"/kv/baf-juraj-durech-partner/endorsers/partner-endorser/*\" { capabilities = [ \"read\", \"list\" ] }
+      policy_content: path \"/baf-juraj-durech-partner/endorsers/partner-endorser/*\" { capabilities = [ \"read\", \"list\" ] }
       auth_path: kubernetes-baf-juraj-durech-partner-partner-endorser-auth
     account:
       admin_service: baf-juraj-durech-partner-admin-vault-auth
