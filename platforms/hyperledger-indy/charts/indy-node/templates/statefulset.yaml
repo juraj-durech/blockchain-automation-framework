@@ -170,10 +170,10 @@ spec:
             name: {{ $.Values.node.name }}-config
         - name:  {{ $.Values.organization.name }}-domain-transactions-genesis
           configMap:
-            name: {{ $.Values.organization.name }}-domain-transactions-genesis
+            name: {{ $.Values.organization.name }}-dtg
         - name: {{ $.Values.organization.name }}-pool-transactions-genesis
           configMap:
-            name: {{ $.Values.organization.name }}-pool-transactions-genesis
+            name: {{ $.Values.organization.name }}-ptg
   volumeClaimTemplates:
     - metadata:
         name: ebs-indy-node-data
