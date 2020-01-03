@@ -19,7 +19,7 @@ spec:
       name: baf
     image:
       name: baf-juraj-durech-provider
-      repository: build.dev-opr.uisp.accenture.com/indy-key-mgmt:0.3.0.0
+      repository: build.dev.di-uisp-accenture.com/indy-key-mgmt:0.3.0.0
       pullSecret: regcred
     vault:
       address: http://platform-ms1.dev.uisp.accenture.com:30296
