@@ -47,27 +47,17 @@ spec:
           KUBE_TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token);
 
           response=$(curl -s -o /dev/null -w "%{http_code}" $VAULT_ADDR/v1/sys/health)
-          if [ $response -ne 200 ]
-          then
+          if [ $response != 200 ]; then
             exit 1
           fi
 
           curl --request POST --data '{"jwt": "'"$KUBE_TOKEN"'", "role": "ro"}' $VAULT_ADDR/v1/auth/kubernetes/${NODE_ID}/login | jq -j '.auth.client_token' > token;
           X_VAULT_TOKEN=$(cat token);
 
-
-          mkdir -p ${KEY_PATH}/bls_keys
-          mkdir -p ${KEY_PATH}/private_keys
-          mkdir -p ${KEY_PATH}/public_keys
-          mkdir -p ${KEY_PATH}/sig_keys
-          mkdir -p ${KEY_PATH}/verif_keys
-          mkdir -p ${KEY_PATH}C/private_keys
-          mkdir -p ${KEY_PATH}C/public_keys
-          mkdir -p ${KEY_PATH}C/sig_keys
-          mkdir -p ${KEY_PATH}C/verif_keys
+          mkdir -p ${KEY_PATH}/bls_keys ${KEY_PATH}/private_keys ${KEY_PATH}/public_keys ${KEY_PATH}/sig_keys ${KEY_PATH}/verif_keys ${KEY_PATH}C/private_keys ${KEY_PATH}C/public_keys ${KEY_PATH}C/sig_keys ${KEY_PATH}C/verif_keys;
 
           LOOKUP_SECRET_RESPONSE=$(curl --header "X-Vault-Token: $X_VAULT_TOKEN" $VAULT_ADDR/v1/"${ORGANIZATION_NAME}"/stewards/${NODE_ID}/node/public/bls_keys | jq -r 'if .errors then . else . end');
-          validateVaultResponse "secret (${NODE_ID}/bls_keys)" "${LOOKUP_SECRET_RESPONSE}"
+          validateVaultResponse "secret (${NODE_ID}/bls_keys)" "${LOOKUP_SECRET_RESPONSE}";
           echo "${LOOKUP_SECRET_RESPONSE}";
           echo "${LOOKUP_SECRET_RESPONSE}" | jq -j '.data.bls_pk' > ${KEY_PATH}/bls_keys/bls_pk;
           chmod 644 ${KEY_PATH}/bls_keys/bls_pk;
