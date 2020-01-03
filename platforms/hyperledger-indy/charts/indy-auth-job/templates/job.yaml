@@ -73,7 +73,7 @@ spec:
 
               # Create role
 
-              curl -s -o /dev/null -w "%{http_code}" --header "X-Vault-Token: $VAULT_TOKEN" --request POST --data '{"bound_service_account_names": "{{ $.Values.account.service }}","bound_service_account_namespaces": "{{ $.Values.metadata.namespace }}","policies": ["{{ $.Values.vault.policy }}"], "ttl": 180}' {{ $.Values.vault.address }}/v1/auth/{{ $.Values.vault.auth_path }}/role/{{ $.Values.account.role }};
+              curl -s -o /dev/null -w "%{http_code}" --header "X-Vault-Token: $VAULT_TOKEN" --request POST --data '{"bound_service_account_names": "{{ $.Values.account.service }}","bound_service_account_namespaces": "{{ $.Values.metadata.namespace }}","policies": ["{{ $.Values.vault.policy }}"], "ttl": 3600}' {{ $.Values.vault.address }}/v1/auth/{{ $.Values.vault.auth_path }}/role/{{ $.Values.account.role }};
 
               # Check role
 
