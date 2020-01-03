@@ -46,7 +46,7 @@ spec:
 
           KUBE_TOKEN=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token);
 
-          response=$(curl -s -o /dev/null -w "%{http_code}" $VAULT_ADDR/v1/sys/health)
+          response=$(curl -s -o /dev/null -w "%{http_code}" $VAULT_ADDR/v1/sys/health);
           if [ $response != 200 ]; then
             exit 1
           fi
