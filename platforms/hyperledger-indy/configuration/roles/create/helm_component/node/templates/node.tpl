@@ -42,7 +42,7 @@ spec:
         clientTargetPort: {{ stewardItem.node.targetPort }}
     configmap:
       indyConfig: |-
-        NETWORK_NAME = {{ network.name }}
+        NETWORK_NAME = '{{ network.name }}'
         # Enable stdout logging
         enableStdOutLogging = True
         logRotationBackupCount = 10
