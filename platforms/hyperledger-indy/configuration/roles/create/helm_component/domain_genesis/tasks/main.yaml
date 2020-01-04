@@ -103,7 +103,7 @@
     {% endif %}
 
 
-    echo "${domain_genesis}"
+    echo -e "${domain_genesis}"
   register: domain_genesis
 
 # ################################################################################################

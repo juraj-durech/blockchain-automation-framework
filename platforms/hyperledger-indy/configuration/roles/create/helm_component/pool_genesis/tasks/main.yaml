@@ -53,7 +53,7 @@
         {% endif %}
       {% endfor %}
     {% endif %}
-    echo ${pool_genesis}
+    echo -e ${pool_genesis}
   register: pool_genesis
 
 # ################################################################################################
