@@ -1,0 +1,88 @@
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: baf-juraj-durech-provider-provider-steward-1-node
+  annotations:
+    flux.weave.works/automated: "false"
+  namespace: baf-juraj-durech-provider-ns
+spec:
+  releaseName: baf-juraj-durech-provider-provider-steward-1-node
+  chart:
+    path: platforms/hyperledger-indy/charts/indy-node
+    git: ssh://git@github.com/juraj-durech/blockchain-automation-framework.git
+    ref: development-environment
+  values:
+    metadata:
+      name: baf-juraj-durech-provider-provider-steward-1-node
+      namespace: baf-juraj-durech-provider-ns
+    network:
+      name: baf
+    organization:
+      name: baf-juraj-durech-provider
+    image:
+      imagePullSecret: regcred
+      initContainer:
+        name: baf-juraj-durech-provider-provider-steward-1-node-init
+        repository: alpine:3.9.4
+      indyNode:
+        name: baf-juraj-durech-provider-provider-steward-1-node
+        repository: build.dev.di-uisp-accenture.com/indy-node:0.3.0.0
+    node:
+      name: baf-juraj-durech-provider-provider-steward-1-node
+      ip: 0.0.0.0
+      port: 19711
+    client:
+      ip: 0.0.0.0
+      port: 19712
+    service:
+      ports:
+        nodePort: 19711
+        nodeTargetPort: 19712
+        clientPort: 19712
+        clientTargetPort: 19711
+    configmap:
+      indyConfig: |-
+        NETWORK_NAME = baf
+        # Enable stdout logging
+        enableStdOutLogging = True
+        logRotationBackupCount = 10
+        # Directory to store ledger.
+        LEDGER_DIR = '/var/lib/indy/data'
+        # Directory to store logs.
+        LOG_DIR = '/var/log/indy'
+        # Directory to store keys.
+        KEYS_DIR = '/var/lib/indy/keys'
+        # Directory to store genesis transactions files.
+        GENESIS_DIR = '/var/lib/indy/genesis'
+        # Directory to store backups.
+        BACKUP_DIR = '/var/lib/indy/backup'
+        # Directory to store plugins.
+        PLUGINS_DIR = '/var/lib/indy/plugins'
+        # Directory to store node info.
+        NODE_INFO_DIR = '/var/lib/indy/data'
+    ambassador:
+      annotations: |-
+        apiVersion: ambassador/v1
+        kind: TCPMapping
+        name: baf-juraj-durech-provider-provider-steward-1-node-node-mapping
+        port: 19711
+        service: baf-juraj-durech-provider-provider-steward-1-node.baf-juraj-durech-provider-ns:19711
+        apiVersion: ambassador/v1
+        kind: TCPMapping
+        name: baf-juraj-durech-provider-provider-steward-1-node-client-mapping
+        port: 19712
+        service: baf-juraj-durech-provider-provider-steward-1-node.baf-juraj-durech-provider-ns:19712
+    vault:
+      address: http://platform-ms1.dev.uisp.accenture.com:30296
+      serviceAccountName: baf-juraj-durech-provider-provider-steward-1-vault-auth
+      keyPath: /keys/baf/keys/provider-steward-1
+      authPath: kubernetes-baf-juraj-durech-provider-provider-steward-1-auth
+      nodeId: provider-steward-1
+      role: ro
+    storage:
+      data:
+        storagesize: 1Gi
+        storageClassName: baf-juraj-durech-provider-aws-baremetal-storageclass
+      keys:
+        storagesize: 1Gi
+        storageClassName: baf-juraj-durech-provider-aws-baremetal-storageclass
