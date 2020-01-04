@@ -49,7 +49,7 @@
                   --arg trustee_did "${first_global_trustee_did}" \
                   --arg trustee_verkey "${trustee_verkey}" \
                   --arg seqNo $seqNo \
-                  --arg alias "{{ organization.name }}-{{ trustee.name }}" \
+                  --arg alias "{{ trustee.name }}" \
                   '{"reqSignature":{},"txn":{"data":{"alias":$alias,"dest":$trustee_did,"role":"0","verkey":$trustee_verkey},"metadata":{},"type":"1"},"txnMetadata":{"seqNo":$seqNo|tonumber},"ver":"1"}')
 
             else
@@ -59,7 +59,7 @@
                   --arg trustee_verkey "${trustee_verkey}" \
                   --arg first_global_trustee_did "${first_global_trustee_did}" \
                   --arg seqNo $seqNo \
-                  --arg alias "{{ organization.name }}-{{ trustee.name }}" \
+                  --arg alias "{{ trustee.name }}" \
                   '{"reqSignature":{},"txn":{"data":{"alias":$alias,"dest":$trustee_did,"role":"0","verkey":$trustee_verkey},"metadata":{"from":$first_global_trustee_did},"type":"1"},"txnMetadata":{"seqNo":$seqNo|tonumber},"ver":"1"}')
 
             fi
@@ -89,7 +89,7 @@
                         --arg trustee_did "${trustee_did}" \
                         --arg steward_verkey "${steward_verkey}" \
                         --arg seqNo $seqNo \
-                        --arg alias "{{ organization.name }}-{{ steward.name }}" \
+                        --arg alias "{{ steward.name }}" \
                         '{"reqSignature":{},"txn":{"data":{"alias":$alias,"dest":$steward_did,"role":"2","verkey":$steward_verkey},"metadata":{"from":$trustee_did},"type":"1"},"txnMetadata":{"seqNo":$seqNo|tonumber},"ver":"1"}')
 
             ((seqNo++))
