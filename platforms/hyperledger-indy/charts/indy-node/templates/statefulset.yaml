@@ -16,7 +16,7 @@ spec:
     spec:
       securityContext:
         fsGroup: 1000
-      serviceAccountName: {{ $.Values.vault.serviceaccountname }}
+      serviceAccountName: {{ $.Values.vault.serviceAccountName }}
       initContainers:
       - name:  "{{ $.Values.image.initContainer.name }}"
         image:  "{{ $.Values.image.initContainer.repository }}"
