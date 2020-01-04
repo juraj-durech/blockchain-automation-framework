@@ -19,4 +19,4 @@ spec:
       name: {{ organizationItem.name }}
     configmap:
       poolGenesis: |-
-        {{ pool_genesis_values | nindent 8 }}
+        {{ pool_genesis_values | indent(width=8, indentfirst=True) }}
