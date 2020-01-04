@@ -76,7 +76,9 @@ spec:
       address: {{ vault.url }}
       serviceAccountName: {{ component_name }}-vault-auth
       keyPath: /keys/{{ network.name }}/keys/{{ component_name }}
+      authPath: kubernetes-{{ organizationItem.name }}-{{ stewardItem.name }}-auth
       nodeId: {{ component_name }}
+      role: ro
     storage:
       data:
         storagesize: 1Gi

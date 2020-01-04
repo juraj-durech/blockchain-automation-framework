@@ -81,8 +81,12 @@ vault:
   #vault-auth-provider-agent-app
   keyPath:
   #/keys/udisp/keys/indy-node
+  authPath:
+  #kubernetes-baf-juraj-durech-partner-partner-steward-1-auth
   nodeId:
   #indy-node
+  role:
+  #ro
 
 storage:
   keys:
