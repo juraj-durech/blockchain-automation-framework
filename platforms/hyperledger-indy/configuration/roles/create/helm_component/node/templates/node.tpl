@@ -62,11 +62,13 @@ spec:
         NODE_INFO_DIR = '/var/lib/indy/data'
     ambassador:
       annotations: |-
+        ---
         apiVersion: ambassador/v1
         kind: TCPMapping
         name: {{ component_name|e }}-node-mapping
         port: {{ stewardItem.node.ambassador }}
         service: {{ component_name|e }}.{{ component_ns }}:{{ stewardItem.node.targetPort }}
+        ---
         apiVersion: ambassador/v1
         kind: TCPMapping
         name: {{ component_name|e }}-client-mapping
