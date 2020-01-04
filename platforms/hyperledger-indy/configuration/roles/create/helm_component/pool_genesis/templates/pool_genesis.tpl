@@ -18,5 +18,5 @@ spec:
     organization:
       name: {{ organizationItem.name }}
     configmap:
-      poolGenesis: |
-        {{ pool_genesis_values }}
+      poolGenesis: |-
+        {{ pool_genesis_values | nindent 8 }}
