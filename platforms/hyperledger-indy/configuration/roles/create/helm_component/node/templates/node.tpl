@@ -37,9 +37,9 @@ spec:
     service:
       ports:
         nodePort: {{ stewardItem.node.port }}
-        nodeTargetPort: {{ stewardItem.client.targetPort }}
+        nodeTargetPort: {{ stewardItem.node.targetPort }}
         clientPort: {{ stewardItem.client.port }}
-        clientTargetPort: {{ stewardItem.node.targetPort }}
+        clientTargetPort: {{ stewardItem.client.targetPort }}
     configmap:
       indyConfig: |-
         NETWORK_NAME = '{{ network.name }}'
