@@ -28,7 +28,7 @@ spec:
         name: {{ component_name }}
         repository: {{ network.docker.url }}/indy-node:0.3.0.0
     node:
-      name: {{ component_name }}
+      name: {{ stewardItem.name }}
       ip: 0.0.0.0
       port: {{ stewardItem.node.port }}
     client:

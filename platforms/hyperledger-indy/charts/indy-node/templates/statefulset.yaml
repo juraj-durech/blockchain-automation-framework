@@ -147,7 +147,7 @@ spec:
               mountPath: /var/lib/indy/data
             - name: ebs-indy-node-keys
               mountPath: /var/lib/indy/keys
-            - name: {{ $.Values.node.name }}-config
+            - name: {{ $.Values.metadata.name }}-config
               mountPath: /etc/indy/indy_config.py
               subPath: indy_config.py
             - name: {{ $.Values.organization.name }}-domain-transactions-genesis
@@ -159,9 +159,9 @@ spec:
       imagePullSecrets:
         - name: "{{ $.Values.image.pullSecret }}"
       volumes:
-        - name: {{ $.Values.node.name }}-config
+        - name: {{ $.Values.metadata.name }}-config
           configMap:
-            name: {{ $.Values.node.name }}-config
+            name: {{ $.Values.metadata.name }}-config
         - name:  {{ $.Values.organization.name }}-domain-transactions-genesis
           configMap:
             name: {{ $.Values.organization.name }}-dtg
