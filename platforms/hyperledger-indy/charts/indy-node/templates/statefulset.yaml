@@ -105,7 +105,7 @@ spec:
           LOOKUP_SECRET_RESPONSE=$(curl --header "X-Vault-Token: $X_VAULT_TOKEN" $VAULT_ADDR/v1/"${ORGANIZATION_NAME}"/stewards/${NODE_ID}/client/public/public_keys  | jq -r 'if .errors then . else . end');
           validateVaultResponse "secret (${NODE_ID}/client/public/public_keys)" "${LOOKUP_SECRET_RESPONSE}";
           echo "${LOOKUP_SECRET_RESPONSE}";
-          echo "${LOOKUP_SECRET_RESPONSE}" | jq -j ".data.\"${NODE_ID}C.key\"" > ${KEY_PATH}C/public_keys/${NODE_ID}C.key;
+          echo "${LOOKUP_SECRET_RESPONSE}" | jq -j ".data.\"${NODE_ID}C.key.bootstrap\"" > ${KEY_PATH}C/public_keys/${NODE_ID}C.key;
           chmod 644 ${KEY_PATH}C/public_keys/${NODE_ID}C.key;
 
           LOOKUP_SECRET_RESPONSE=$(curl --header "X-Vault-Token: $X_VAULT_TOKEN" $VAULT_ADDR/v1/"${ORGANIZATION_NAME}"/stewards/${NODE_ID}/client/private/sig_keys | jq -r 'if .errors then . else . end');
