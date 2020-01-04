@@ -20,7 +20,7 @@ spec:
     organization:
       name: {{ organizationItem.name }}
     image:
-      imagePullSecret: regcred
+      pullSecret: regcred
       initContainer:
         name: {{ component_name }}-init
         repository: alpine:3.9.4
