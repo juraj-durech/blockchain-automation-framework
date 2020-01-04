@@ -83,7 +83,7 @@ spec:
       role: ro
     storage:
       data:
-        storagesize: 1Gi
+        storagesize: 10Gi
         storageClassName: {{ organizationItem.name }}-{{ organizationItem.cloud_provider }}-storageclass
       keys:
         storagesize: 1Gi
