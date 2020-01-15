@@ -1,0 +1,26 @@
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: baf-juraj-durech-authority-dtg
+  annotations:
+    flux.weave.works/automated: "false"
+  namespace: baf-juraj-durech-authority-ns
+spec:
+  releaseName: baf-juraj-durech-authority-dtg
+  chart:
+    path: platforms/hyperledger-indy/charts/indy-domain-genesis
+    git: ssh://git@github.com/juraj-durech/blockchain-automation-framework.git
+    ref: development-environment
+  values:
+    metadata:
+      name: baf-juraj-durech-authority-dtg
+      namespace: baf-juraj-durech-authority-ns
+    organization:
+      name: baf-juraj-durech-authority
+    configmap:
+      domainGenesis: |-
+        {"reqSignature":{},"txn":{"data":{"alias":"authority-trustee","dest":"JvdR3QirSjrs4Vevght3Q5","role":"0","verkey":"AmdgkjsBJxuEwtJqtnr8nFF5WsYSitG88HFpWkfurwrD"},"metadata":{},"type":"1"},"txnMetadata":{"seqNo":1},"ver":"1"}
+        {"reqSignature":{},"txn":{"data":{"alias":"provider-steward-1","dest":"Jwb6feXtTruFQFvmdBDTGY","role":"2","verkey":"AnA31YedRvYA7js9n7mNotN5Y2rf9S3RzgqQ61c71K6s"},"metadata":{"from":"JvdR3QirSjrs4Vevght3Q5"},"type":"1"},"txnMetadata":{"seqNo":2},"ver":"1"}
+        {"reqSignature":{},"txn":{"data":{"alias":"provider-steward-2","dest":"N6r9gf7Moxz4NQDP8uiJzV","role":"2","verkey":"CW3EJH2kjb7jTJXzvKwBFFh6vsi3KMXWCZ1qphhaXoFV"},"metadata":{"from":"JvdR3QirSjrs4Vevght3Q5"},"type":"1"},"txnMetadata":{"seqNo":3},"ver":"1"}
+        {"reqSignature":{},"txn":{"data":{"alias":"partner-steward-1","dest":"NMU3aoDhdQqftobNb6rJMB","role":"2","verkey":"Ce1MvcTC12bMWyKXZRNxUjh9duEUaDvff9asYASWiPB2"},"metadata":{"from":"JvdR3QirSjrs4Vevght3Q5"},"type":"1"},"txnMetadata":{"seqNo":4},"ver":"1"}
+        {"reqSignature":{},"txn":{"data":{"alias":"partner-steward-2","dest":"36jkFMZgVQkERr4eu1pMc3","role":"2","verkey":"29MM6BYnNSnaK3cTKZkBGNW1742mYufjm6MyoXnDpcKr"},"metadata":{"from":"JvdR3QirSjrs4Vevght3Q5"},"type":"1"},"txnMetadata":{"seqNo":5},"ver":"1"}
