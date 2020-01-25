@@ -1,0 +1,15 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: provider-aws-baremetal-storageclass
+provisioner: kubernetes.io/aws-ebs
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+parameters:
+  encrypted: "true"
+  kmsKeyId: fbed10ef-3179-4330-9a4c-70d67a154e13
+allowedTopologies:
+  - matchLabelExpressions:
+    - key: failure-domain.beta.kubernetes.io/zone
+      values:
+      - us-east-1f
