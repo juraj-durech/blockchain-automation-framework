@@ -1,0 +1,36 @@
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: baf-juraj-durech-provider-provider-endorser-auth-job
+  annotations:
+    flux.weave.works/automated: "false"
+  namespace: baf-juraj-durech-provider-ns
+spec:
+  releaseName: baf-juraj-durech-provider-provider-endorser-auth-job
+  chart:
+    path: platforms/hyperledger-indy/charts/indy-auth-job
+    git: ssh://git@github.com/juraj-durech/blockchain-automation-framework.git
+    ref: development-environment
+  values:
+    metadata:
+      name: baf-juraj-durech-provider-provider-endorser-auth-job
+      namespace: baf-juraj-durech-provider-ns
+    network:
+      name: baf
+      kubernetes_url: https://10.25.3.21:6443
+    image:
+      name: baf-juraj-durech-provider
+      repository: alpine:3.9.4
+    vault:
+      address: http://baf1.bafdev.uisp.accenture.com:15296
+      keyPath: baf-juraj-durech-provider.endorsers
+      identity: provider-endorser
+      admin_auth_path: kubernetes-baf-juraj-durech-provider-admin-auth
+      policy: baf-juraj-durech-provider-provider-endorser-ro
+      policy_content: path \"/baf-juraj-durech-provider/endorsers/provider-endorser/*\" { capabilities = [ \"read\", \"list\" ] }
+      auth_path: kubernetes-baf-juraj-durech-provider-provider-endorser-auth
+    account:
+      admin_service: baf-juraj-durech-provider-admin-vault-auth
+      admin_role: rw
+      service: baf-juraj-durech-provider-provider-endorser-vault-auth
+      role: ro
