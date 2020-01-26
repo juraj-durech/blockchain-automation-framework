@@ -1,0 +1,31 @@
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: baf-juraj-durech-provider-provider-endorser
+  annotations:
+    flux.weave.works/automated: "false"
+  namespace: baf-juraj-durech-provider-ns
+spec:
+  releaseName: baf-juraj-durech-provider-provider-endorser
+  chart:
+    path: platforms/hyperledger-indy/charts/indy-key-mgmt
+    git: ssh://git@github.com/juraj-durech/blockchain-automation-framework.git
+    ref: development-environment
+  values:
+    metadata:
+      name: baf-juraj-durech-provider-provider-endorser
+      namespace: baf-juraj-durech-provider-ns
+    network:
+      name: baf
+    image:
+      name: baf-juraj-durech-provider
+      repository: build.dev.di-uisp-accenture.com/indy-key-mgmt:0.3.0.0
+      pullSecret: regcred
+    vault:
+      address: http://baf1.bafdev.uisp.accenture.com:15296
+      keyPath: baf-juraj-durech-provider.endorsers
+      identity: provider-endorser
+      auth_path: kubernetes-baf-juraj-durech-provider-admin-auth
+    account:
+      service: baf-juraj-durech-provider-admin-vault-auth
+      role: rw
