@@ -1,7 +1,8 @@
 ---
 - name: Delete Helm release
   shell: |
-    KUBECONFIG={{ kubernetes.config_file }} kubectl delete secret git-auth-{{ network.env.type }} -n default
+    KUBECONFIG={{ kubernetes.config_file }} kubectl delete secret git-auth-{{ network.env.type }}-https -n default
+    KUBECONFIG={{ kubernetes.config_file }} kubectl delete secret git-auth-{{ network.env.type }}-ssh -n default
     KUBECONFIG={{ kubernetes.config_file }} helm delete flux-{{ network.env.type }} --purge
   ignore_errors: yes
 
