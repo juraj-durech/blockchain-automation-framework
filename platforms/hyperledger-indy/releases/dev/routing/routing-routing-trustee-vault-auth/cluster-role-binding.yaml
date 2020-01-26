@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: routing-routing-trustee-vault-auth-role-binding
+  namespace: routing-ns
+  labels:
+    organization: routing
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:auth-delegator
+subjects:
+- kind: ServiceAccount
+  name: routing-routing-trustee-vault-auth
+  namespace: routing-ns
