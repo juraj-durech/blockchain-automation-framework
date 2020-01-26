@@ -1,0 +1,36 @@
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: routing-routing-trustee-auth-job
+  annotations:
+    flux.weave.works/automated: "false"
+  namespace: routing-ns
+spec:
+  releaseName: routing-routing-trustee-auth-job
+  chart:
+    path: platforms/hyperledger-indy/charts/indy-auth-job
+    git: ssh://git@ssh.dev.azure.com:v3/udisp-apps/UDISP/blockchain-automation-framework
+    ref: development-environment
+  values:
+    metadata:
+      name: routing-routing-trustee-auth-job
+      namespace: routing-ns
+    network:
+      name: baf
+      kubernetes_url: https://10.3.8.5:6443
+    image:
+      name: routing
+      repository: alpine:3.9.4
+    vault:
+      address: http://platform-ms1.dev.uisp.accenture.com:15196
+      keyPath: routing.trustees
+      identity: routing-trustee
+      admin_auth_path: kubernetes-routing-admin-auth
+      policy: routing-routing-trustee-ro
+      policy_content: path \"/routing/trustees/routing-trustee/*\" { capabilities = [ \"read\", \"list\" ] }
+      auth_path: kubernetes-routing-routing-trustee-auth
+    account:
+      admin_service: routing-admin-vault-auth
+      admin_role: rw
+      service: routing-routing-trustee-vault-auth
+      role: ro
